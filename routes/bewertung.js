@@ -1,11 +1,13 @@
 const express = require('express');
-const Bewertung= require('../models/Bewertung');
-const Student = require('../models/Student');
 const router = express.Router();
+const Bewertung= require('../models/Bewertung.js');
+// const Student = require('../models/Student');
+
 
 router.get('/', (req, res) => {
 
   Bewertung.find()
+  .populate('Student')
     .then(Bewertung => {
       res.status(200).json(Bewertung);
     })
@@ -15,24 +17,28 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('post task');
-  const {Sozialkompetenz, Bewertung, Kommentar, Datum, studentId } = req.body;
-
+  console.log(req)
+  const Sozialkompetenz=req.body.Sozialkompetenz;
+  const Bewertungen=req.body.Bewertung;
+  const Kommentar=req.body.Kommentar;
+  const Datum=req.body.Datum;
+  const Student = req.body.Student;
   Bewertung.create({
     Sozialkompetenz,
-    Bewertung,
+    Bewertungen,
     Kommentar,
     Datum,
-    student: studentId
+    Student
   })
     .then(Bewertung=> {
-      return Student.findByIdAndUpdate(studentId, {
-        $push: { Sozialkompetenzziele:Bewertung._id }
-      }).then(() => {
-        res.status(201).json({
-          message: `Task with id was successfully added to project with id ${studentId}`
-        });
-      });
+      res.status(201).json(Bewertung);
+      // return Student.findByIdAndUpdate(studentId, {
+      //   $push: { Sozialkompetenzziele:Bewertung._id }
+      // }).then(() => {
+      //   res.status(201).json({
+      //     message: `Task with id was successfully added to project with id ${studentId}`
+      //   });
+      // });
     })
     .catch(err => {
       res.json(err);

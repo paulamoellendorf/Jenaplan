@@ -2,15 +2,10 @@ const mongoose=require('mongoose');
 const { Schema, model }= mongoose;
 
 const bewertungSchema= new Schema({
-Sozialkompetenz:{
-  type:String,
-  enum:['Frustrationstoleranz', 'Selbstreflexion',
-'Verantwortungsbewusstsein', 'SichMotivieren', 'Zuverlässigkeit','Engagement',
-'Selbstständigkeit', 'SelbstbewusstseinAusbauen','WertschätzenderUmgang', 'VorbildlichSein', 'MentorSein', 'Erfahrungsweitergabe', 'Gruppenerfahrung', 'Zivilcourage', 'Kritikfähigkeit', 'Teamfähigkeit' ]
-},
-Bewertung:Number,
+Sozialkompetenz:String,
+Bewertungen:Number,
 Kommentar:String,
-Datum:Date,
+Datum:String,
 Student:{
   type:Schema.Types.ObjectId,
   ref:'Student'
