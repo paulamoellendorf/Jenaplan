@@ -10,6 +10,7 @@ router.post('/', (req, res)=>{
   const Klasse=req.body.Klasse;
   const Stammgruppe=req.body.Stammgruppe;
   const Sozialkompetenzziele=[];
+  const img=req.body.img;
   // const Frustrationstoleranz=[];
   // const Selbstreflexion=[];
   // const Verantwortungsbewusstsein=[];
@@ -32,7 +33,8 @@ router.post('/', (req, res)=>{
     Nachname,
     Klasse,
     Stammgruppe,
-    Sozialkompetenzziele
+    Sozialkompetenzziele,
+    img
     // Frustrationstoleranz,
     // Selbstreflexion,
     // Verantwortungsbewusstsein,

@@ -79,5 +79,6 @@ app.use('/api/students', require('./routes/student'));
 app.use('/api/bewertungen', require('./routes/bewertung'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/user'));
+app.use('/api/trimester', require('./routes/trimester'));
 
 module.exports = app;

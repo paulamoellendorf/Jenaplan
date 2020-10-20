@@ -8,6 +8,8 @@ router.get('/', (req, res) => {
 
   Bewertung.find()
   .populate('Student')
+  .populate('Lehrer')
+  .populate('Trimester')
     .then(Bewertung => {
       res.status(200).json(Bewertung);
     })
@@ -23,12 +25,16 @@ router.post('/', (req, res) => {
   const Kommentar=req.body.Kommentar;
   const Datum=req.body.Datum;
   const Student = req.body.Student;
+  const Lehrer=req.user._id;
+  const Trimester=req.body.Trimester
   Bewertung.create({
     Sozialkompetenz,
     Bewertungen,
     Kommentar,
     Datum,
-    Student
+    Student,
+    Lehrer,
+    Trimester
   })
     .then(Bewertung=> {
       res.status(201).json(Bewertung);
@@ -58,20 +64,20 @@ router.post('/', (req, res) => {
 //     });
 // });
 
-// router.delete('/:id', (req, res, next) => {
-//   const id = req.params.id;
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id;
 
-//   Task.findByIdAndDelete(id)
-//     .then(task => {
-//       return Project.findByIdAndUpdate(task.project, {
-//         $pull: { tasks: id }
-//       }).then(() => {
-//         res.json({ message: 'ok' });
-//       });
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
+  Bewertung.findByIdAndDelete(id)
+    // .then(bewertung => {
+    //   return Project.findByIdAndUpdate(task.project, {
+    //     $pull: { tasks: id }
+    //   }).then(() => {
+    //     res.json({ message: 'ok' });
+    //   });
+    // })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 module.exports = router;

@@ -11,9 +11,14 @@ Student:{
   ref:'Student'
 },
 
-// Lehrer:{
-  
-// }
+Lehrer:{
+  type:Schema.Types.ObjectId,
+  ref:'User'
+},
+Trimester:{
+  type:Schema.Types.ObjectId,
+  ref:'Trimester'
+}
 
 
 });
