@@ -5,6 +5,7 @@ const { populate } = require('../models/Student');
 
 
 router.post('/', (req, res)=>{
+  
   const Vorname=req.body.Vorname;
   const Nachname=req.body.Nachname;
   const Klasse=req.body.Klasse;

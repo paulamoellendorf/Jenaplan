@@ -11,10 +11,7 @@ const studentSchema=new Schema ({
     ref:'Bewertung',
     default:[]
   },
-  img: { 
-      data: Buffer, 
-      contentType: String 
-  } ,
+  img:Object,
   // Frustrationstoleranz:[{
   //   type:[Schema.Types.ObjectId],
   //       ref:'Bewertung'
