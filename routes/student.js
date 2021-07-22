@@ -4,30 +4,17 @@ const Student=require('../models/Student');
 const { populate } = require('../models/Student');
 
 
+
 router.post('/', (req, res)=>{
+ 
+
+
   
   const Vorname=req.body.Vorname;
   const Nachname=req.body.Nachname;
   const Klasse=req.body.Klasse;
   const Stammgruppe=req.body.Stammgruppe;
   const Sozialkompetenzziele=[];
-  const img=req.body.img;
-  // const Frustrationstoleranz=[];
-  // const Selbstreflexion=[];
-  // const Verantwortungsbewusstsein=[];
-  // const SichMotivieren=[];
-  // const Zuverlässigkeit=[];
-  // const Engagement=[];
-  // const Selbstständigkeit=[];
-  // const SelbstbewusstseinAusbauen=[];
-  // const WertschätzenderUmgang=[];
-  // const VorbildlichSein=[];
-  // const MentorSein=[];
-  // const Erfahrungsweitergabe=[];
-  // const Gruppenerfahrung=[];
-  // const Zivilcourage=[];
-  // const Kritikfähigkeit=[];
-  // const Teamfähigkeit=[];
 
   Student.create({
     Vorname,
@@ -35,23 +22,7 @@ router.post('/', (req, res)=>{
     Klasse,
     Stammgruppe,
     Sozialkompetenzziele,
-    img
-    // Frustrationstoleranz,
-    // Selbstreflexion,
-    // Verantwortungsbewusstsein,
-    // SichMotivieren,
-    // Zuverlässigkeit,
-    // Engagement,
-    // Selbstständigkeit,
-    // SelbstbewusstseinAusbauen,
-    // WertschätzenderUmgang,
-    // VorbildlichSein,
-    // MentorSein,
-    // Erfahrungsweitergabe,
-    // Gruppenerfahrung,
-    // Zivilcourage,
-    // Kritikfähigkeit,
-    // Teamfähigkeit,
+  
   })
   .then(student=>{
     res.status(201).json(student);
@@ -64,22 +35,7 @@ router.post('/', (req, res)=>{
 router.get('/', (req, res)=>{
   Student.find()
   .populate('Sozialkompetenzziele')
-  // .populate('Frustrationstoleranz')
-  // .populate('Selbstreflexion')
-  // .populate('Verantwortungsbewusstsein')
-  // .populate('SichMotivieren')
-  // .populate('Zuverlässigkeit')
-  // .populate('Engagement')
-  // .populate('Selbstständigkeit')
-  // .populate('SelbstbewusstseinAusbauen')
-  // .populate('WertschätzenderUmgang')
-  // .populate('VorbildlichSein')
-  // .populate('MentorSein')
-  // .populate('Erfahrungsweitergabe')
-  // .populate('Gruppenerfahrung')
-  // .populate('Zivilcourage')
-  // .populate('Kritikfähigkeit')
-  // .populate('Teamfähigkeit')
+
   .then(students=>{
     res.status(200).json(students);
   })
@@ -119,6 +75,28 @@ router.get('/:id', (req, res)=>{
   })
 })
 
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const { 
+    Vorname,
+    Nachname,
+    Klasse,
+    Stammgruppe,
+    Sozialkompetenzziele,
+  } = req.body;
 
+  Student.findByIdAndUpdate(id, {  Vorname,
+    Nachname,
+    Klasse,
+    Stammgruppe,
+    Sozialkompetenzziele,
+  }, { new: true })
+    .then(student => {
+      res.json(student);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 module.exports=router;

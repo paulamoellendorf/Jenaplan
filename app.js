@@ -9,7 +9,6 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const cors = require('cors');
-
  
 
 
@@ -46,6 +45,8 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -54,7 +55,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+// app.use(methodOverride('_method'));
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -80,5 +81,4 @@ app.use('/api/bewertungen', require('./routes/bewertung'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/user'));
 app.use('/api/trimester', require('./routes/trimester'));
-
 module.exports = app;
